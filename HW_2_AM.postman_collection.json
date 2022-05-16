@@ -70,12 +70,12 @@
 							"\r",
 							"//Check that the name in the response is equal to name from request (name take from request) -№8\r",
 							"pm.test(\"check name from request\", function () {\r",
-							"    pm.expect(jsonData.name).to.eql(request.data.name);\r",
+							"    pm.expect(jsonData.name).to.eql(req.name);\r",
 							"});\r",
 							"\r",
 							"// Check that age in the response is equal to age from request (age take from request) -№9\r",
 							"pm.test(\"check age from request\", function () {\r",
-							"    pm.expect(jsonData.age).to.eql(request.data.age);\r",
+							"    pm.expect(jsonData.age).to.eql(req.age);\r",
 							"});\r",
 							"\r",
 							"// Check that salary in the response is equal to salary from request (salary take from request.) . -№10\r",
@@ -462,10 +462,10 @@
 							"pm.environment.set(\"salary\",request.data.salary)\r",
 							"\r",
 							"//Write a сycle that prints to the console elements from the salary parameter -№21\r",
-							"//let salarArr = jsonData.salary\r",
-							"//console.log(salarArr)\r",
-							"//for (let i = 0 ; i < salarArr.length ; i++ ) {\r",
-							"//console.log(salarArr[i])}"
+							"let salarArr = jsonData.salary\r",
+							"console.log(salarArr)\r",
+							"for (let i = 0 ; i < salarArr.length ; i++ ) {\r",
+							"console.log(salarArr[i])}"
 						],
 						"type": "text/javascript"
 					}
