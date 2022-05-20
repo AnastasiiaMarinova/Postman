@@ -1,0 +1,478 @@
+{
+	"info": {
+		"_postman_id": "49a61a64-0d2d-4348-9e97-9e1665ed43fb",
+		"name": "HW_2_extra_AM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "16247137"
+	},
+	"item": [
+		{
+			"name": "extra_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let req_sal = pm.request.url.query.get(\"salary\")\r",
+							"console.log(req_sal)\r",
+							"\r",
+							"let resp_sal = pm.response.json().salary\r",
+							"//console.log(resp_sal)\r",
+							"for (let i = 0 ; i < resp_sal.length; i++) {\r",
+							"pm.test(`req_sal*${i+1} ${req_sal} == resp_sal ${resp_sal[i]}`, function() {\r",
+							"    pm.expect(+req_sal*(i+1)).to.eql(+resp_sal[i])\r",
+							"   // console.log(req_sal*(i+1))\r",
+							"})\r",
+							"}\r",
+							"\r",
+							"resp_sal.forEach((e , i)  => {\r",
+							"pm.test(`req_sal*${i+1} ${req_sal} == resp_sal ${e}`, function() {\r",
+							"    pm.expect(+req_sal*(i+1)).to.eql(+e)\r",
+							"})\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "\n",
+							"value": "\n",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "\n",
+							"value": "\n",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "\n",
+							"value": "\n",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Anastasiia&age=32&salary=2000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Anastasiia"
+						},
+						{
+							"key": "age",
+							"value": "32"
+						},
+						{
+							"key": "salary",
+							"value": "2000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "extra_4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let arr = []\r",
+							"const resp =pm.response.json()\r",
+							"\r",
+							"for(const key in resp) {\r",
+							"    arr.push(key)\r",
+							"}\r",
+							"\r",
+							"//console.log(arr)\r",
+							"\r",
+							"arr.forEach((e) => {\r",
+							"    pm.test(`response has ${e}`, function(){\r",
+							"        pm.expect(pm.response.json()).to.have.property(e)\r",
+							"    })\r",
+							"})\r",
+							"\r",
+							"const count =  ['', 3.3, 2.7, 3.8, 2, 1]\r",
+							" \r",
+							" //console.log(arr)\r",
+							"\r",
+							" arr.forEach((e, i) => {\r",
+							"    pm.test(`response has ${e}`, function(){\r",
+							"        pm.expect(+resp[e]).to.equal(2000*count[i])\r",
+							"    })\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Anastasiia",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "32",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "2000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Anastasiia",
+							"disabled": true
+						},
+						{
+							"key": "age",
+							"value": "32",
+							"disabled": true
+						},
+						{
+							"key": "salary",
+							"value": "2000",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "extra_4_another_variant",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let arr = []\r",
+							"const resp =pm.response.json()\r",
+							"const salary = 2000\r",
+							"\r",
+							"const counters = { \r",
+							"    'person': '',\r",
+							"    'start_qa_salary': 1,\r",
+							"    'qa_salary_after_6_months': 2,\r",
+							"    'qa_salary_after_12_months': 2.7,\r",
+							"    'qa_salary_after_1.5_year': 3.3,\r",
+							"    'qa_salary_after_3.5_years': 3.8\r",
+							"}\r",
+							"\r",
+							"for(const key in counters) {\r",
+							"    pm.test(`response has ${key}`, () => {\r",
+							"        pm.expect(resp).to.have.property(key)\r",
+							"    } )\r",
+							"if (key != 'person') {\r",
+							"    pm.test(`${key} = ${salary} * ${counters[key]}`, () => {\r",
+							"        pm.expect(resp[key]).to.eql(counters[key]* salary)\r",
+							"    })\r",
+							"} }"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Anastasiia",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "32",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "2000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Anastasiia",
+							"disabled": true
+						},
+						{
+							"key": "age",
+							"value": "32",
+							"disabled": true
+						},
+						{
+							"key": "salary",
+							"value": "2000",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "extra_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let req_sal = +pm.request.url.query.get(\"salary\")\r",
+							"let req_age = +pm.request.url.query.get(\"age\")\r",
+							"let req_name = pm.request.url.query.get(\"name\")\r",
+							"\r",
+							"//console.log(req_sal)\r",
+							"//console.log(req_age)\r",
+							"//console.log(req_name)\r",
+							"\r",
+							"const req_obj = {\r",
+							"    age: req_age,\r",
+							"    name : req_name,\r",
+							"    salary : req_sal\r",
+							"}\r",
+							"\r",
+							"//console.log(req_obj)\r",
+							"\r",
+							"let resp_sal = pm.response.json().salary\r",
+							"let resp_name = pm.response.json().name\r",
+							"let resp_age = pm.response.json().age\r",
+							"\r",
+							"const resp_obj= {\r",
+							"    age: resp_age,\r",
+							"    name : resp_name,\r",
+							"    salary : resp_sal\r",
+							"}\r",
+							"\r",
+							"pm.test('resp_obj == req_obj', function(){\r",
+							"    pm.expect(req_obj).to.deep.equal(resp_obj)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "\n",
+							"value": "\n",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "\n",
+							"value": "\n",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "\n",
+							"value": "\n",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_3?name=Anastasiia&age=32&salary=2000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Anastasiia"
+						},
+						{
+							"key": "age",
+							"value": "32"
+						},
+						{
+							"key": "salary",
+							"value": "2000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "extra_3_another_variant",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let req_sal = +pm.request.url.query.get(\"salary\")\r",
+							"let req_age = +pm.request.url.query.get(\"age\")\r",
+							"let req_name = pm.request.url.query.get(\"name\")\r",
+							"\r",
+							"const req_obj= {\r",
+							"    name : req_name,\r",
+							"    age: req_age,\r",
+							"    salary : req_sal\r",
+							"}\r",
+							"\r",
+							"const resp_obj = {}\r",
+							"\r",
+							"for(key in req_obj) {\r",
+							"    if (!isNaN(pm.response.json()[key])){\r",
+							"    resp_obj[key] = +pm.response.json()[key] }\r",
+							"    else resp_obj[key] = pm.response.json()[key]\r",
+							"}\r",
+							"\r",
+							"pm.test('resp_obj == req_obj', function(){\r",
+							"    pm.expect(req_obj).to.deep.equal(resp_obj)\r",
+							"    })"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "\n",
+							"value": "\n",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "\n",
+							"value": "\n",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "\n",
+							"value": "\n",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_3?name=Anastasiia&age=32&salary=2000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Anastasiia"
+						},
+						{
+							"key": "age",
+							"value": "32"
+						},
+						{
+							"key": "salary",
+							"value": "2000"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
