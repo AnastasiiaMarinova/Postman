@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "80f1d895-a9fa-47a7-8bab-3ff3ea5a1a2c",
+		"name": "HW_2_extra_first_task_validate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "16247137"
+	},
+	"item": [
+		{
+			"name": "Validate_user_info_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 1) Name: 3-40 characters inclusive, prefix and postfix spaces are not allowed. Required field (Name: 3-40 символов включительно, запрещены префиксные и постфиксные пробелы. Поле обязательное)\r",
+							"// 2) Age: only integers in the range 18-120 inclusive. Required field (Age: только целые цифры в диапазоне 18-120 включительно. Поле обязательное)\r",
+							"// 3) Salary: Only whole numbers in the range 1-1000000 inclusive. Required field (Salary: только целые цифры в диапазоне 1-1000000 включительно. Поле обязательное)\r",
+							"\r",
+							"function nameValidation(value) {\r",
+							"    if(value && value.length > 2 && value.length < 41 && value.trim() == value) {\r",
+							"        return true\r",
+							"    } else return false\r",
+							"} \r",
+							"function ageValidation(value) {\r",
+							"  if(value && !isNaN(value) && value > 17 && value < 121 && Number.isInteger(+value)) {\r",
+							"      return true\r",
+							"  } else return false\r",
+							"}\r",
+							"\r",
+							" function salaryValidation(value) {\r",
+							"     if(value && !isNaN(value) && value > 0 && value < 11000001 && Number.isInteger(+value)) {\r",
+							"         return true\r",
+							"     } else return false\r",
+							" }\r",
+							"\r",
+							"function validator() {\r",
+							"    return nameValidation(name) && ageValidation(age) && salaryValidation(salary) ? true : false\r",
+							"}\r",
+							"let name = pm.iterationData.get('name')\r",
+							"let age = pm.iterationData.get('age')\r",
+							"let salary = pm.iterationData.get('salary')\r",
+							"\r",
+							"\r",
+							"if(validator()) {\r",
+							"    pm.test(`Expect status 200 with name = \"${name}\", age = \"${age}\" and salary = \"${salary}\"`, () => {\r",
+							"         pm.response.to.have.status(200);\r",
+							"    }) \r",
+							"} else {\r",
+							"     pm.test(`Expect NOT to have status 200 with name = \"${name}\", age = \"${age}\" and salary = \"${salary}\"`, () => {\r",
+							"         pm.response.to.not.have.status(200);\r",
+							"    })  \r",
+							"}\r",
+							"console.log(validator())\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "{{age}}",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "{{salary}}",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://162.55.220.72:5005/user_info_2"
+			},
+			"response": []
+		}
+	]
+}
